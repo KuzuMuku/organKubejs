@@ -1,0 +1,1 @@
+cn.kuzuanpa.organkubejs.kubejs.OrganKubejsPlugin
