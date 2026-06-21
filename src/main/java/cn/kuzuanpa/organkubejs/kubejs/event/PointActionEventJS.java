@@ -11,6 +11,7 @@ public class PointActionEventJS extends EventJS {
     private String callback;
     private long availablePoints;
     private EffectDefinition.BonusAction action;
+    private long consumePoints;
 
     public PointActionEventJS() {
     }
@@ -20,6 +21,7 @@ public class PointActionEventJS extends EventJS {
         this.callback = callback;
         this.availablePoints = availablePoints;
         this.action = action;
+        this.consumePoints = 0L;
     }
 
     public MinecraftServer getServer() {
@@ -54,8 +56,16 @@ public class PointActionEventJS extends EventJS {
         return action != null ? action.maxConsume() : 0L;
     }
 
-    public boolean getConsumePoints() {
-        return action != null && action.consumePoints();
+    public boolean isPointsConsume() {
+        return action != null && action.isPointsConsume();
+    }
+
+    public long getConsumePoints() {
+        return consumePoints;
+    }
+
+    public void setConsumePoints(long consume) {
+        this.consumePoints = Math.max(0L, consume);
     }
 
     public String configString(String key) {

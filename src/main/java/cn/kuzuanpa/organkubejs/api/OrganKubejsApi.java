@@ -3,12 +3,18 @@ package cn.kuzuanpa.organkubejs.api;
 import cn.kuzuanpa.organapi.api.query.OrganPosition;
 import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
 import cn.kuzuanpa.organeffectprocessor.api.OepPointApi;
+import cn.kuzuanpa.organeffectprocessor.api.extension.SkillExecutor;
+import cn.kuzuanpa.organeffectprocessor.common.skill.SkillDefinition;
+import cn.kuzuanpa.organeffectprocessor.common.skill.SkillManager;
 import cn.kuzuanpa.organkubejs.kubejs.OrganKubejsEvents;
 import cn.kuzuanpa.organkubejs.kubejs.event.PointActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PredicateEventJS;
+import cn.kuzuanpa.organkubejs.kubejs.event.SkillCastEventJS;
+import java.util.List;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 public final class OrganKubejsApi {
     private OrganKubejsApi() {
@@ -77,11 +83,40 @@ public final class OrganKubejsApi {
         OepPointApi.refresh(entity);
     }
 
+    public static void registerSkill(String skillId, String nameKey, String descriptionKey, int maxLevel, String callback) {
+        String normalizedSkillId = normalizeSkillId(skillId);
+        if (normalizedSkillId.isBlank()) {
+            return;
+        }
+        String resolvedNameKey = nameKey == null || nameKey.isBlank() ? normalizedSkillId : nameKey;
+        String resolvedDescriptionKey = descriptionKey == null || descriptionKey.isBlank() ? normalizedSkillId + ".desc" : descriptionKey;
+        String resolvedCallback = callback == null || callback.isBlank() ? normalizedSkillId : callback;
+        SkillManager.registerSkill(new SkillDefinition(
+                normalizedSkillId,
+                resolvedNameKey,
+                resolvedDescriptionKey,
+                List.of(),
+                Math.max(1, maxLevel)
+        ));
+        SkillManager.registerSkillExecutor(normalizedSkillId, new SkillExecutor() {
+            @Override
+            public boolean cast(Player player, int level) {
+                return player instanceof ServerPlayer serverPlayer
+                        && OrganKubejsEvents.postSkillCast(resolvedCallback, new SkillCastEventJS(serverPlayer, normalizedSkillId, resolvedCallback, level));
+            }
+        });
+    }
+
     public static boolean evaluatePredicate(ServerPlayer player, String callback, ResourceLocation organId, OrganPosition position, EffectDefinition.Condition condition) {
         return OrganKubejsEvents.postPredicate(callback, new PredicateEventJS(player, callback, organId, position, condition));
     }
 
     public static long invokePointAction(ServerPlayer player, String callback, long availablePoints, EffectDefinition.BonusAction action) {
         return OrganKubejsEvents.postPointAction(callback, new PointActionEventJS(player, callback, availablePoints, action));
+    }
+
+    private static String normalizeSkillId(String skillId) {
+        ResourceLocation parsed = ResourceLocation.tryParse(skillId);
+        return parsed != null ? parsed.toString() : (skillId == null ? "" : skillId);
     }
 }

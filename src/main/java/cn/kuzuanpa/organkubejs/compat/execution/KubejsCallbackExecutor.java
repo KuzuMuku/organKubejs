@@ -4,9 +4,13 @@ import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
 import cn.kuzuanpa.organeffectprocessor.api.extension.PointExecutor;
 import cn.kuzuanpa.organeffectprocessor.common.effect.RuntimePointExecutor;
 import cn.kuzuanpa.organkubejs.api.OrganKubejsApi;
+import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerPlayer;
+import org.slf4j.Logger;
 
 public final class KubejsCallbackExecutor implements PointExecutor {
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     @Override
     public String type() {
         return "kubejs_call";
@@ -35,7 +39,8 @@ public final class KubejsCallbackExecutor implements PointExecutor {
 
         long requestedUsage = OrganKubejsApi.invokePointAction(player, callback, preview.usedPoints(), action);
         long clampedUsage = Math.max(0L, Math.min(preview.usedPoints(), requestedUsage));
-        if (clampedUsage <= 0L || !action.consumePoints()) {
+
+        if (clampedUsage <= 0L || !action.isPointsConsume()) {
             return;
         }
 
@@ -52,7 +57,7 @@ public final class KubejsCallbackExecutor implements PointExecutor {
                 action.pointId(),
                 action.source(),
                 maxConsume,
-                action.consumePoints(),
+                action.isPointsConsume(),
                 action.effectId(),
                 action.durationTicks(),
                 action.amplifier(),

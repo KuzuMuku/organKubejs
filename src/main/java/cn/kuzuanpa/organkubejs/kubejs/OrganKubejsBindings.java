@@ -63,4 +63,8 @@ public final class OrganKubejsBindings {
     public void refresh(LivingEntity entity) {
         OrganKubejsApi.refresh(entity);
     }
+
+    public void registerSkill(String skillId, String nameKey, String descriptionKey, int maxLevel, String callback) {
+        OrganKubejsApi.registerSkill(skillId, nameKey, descriptionKey, maxLevel, callback);
+    }
 }
