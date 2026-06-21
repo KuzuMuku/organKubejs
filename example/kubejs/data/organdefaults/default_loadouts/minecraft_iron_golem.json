@@ -1,0 +1,13 @@
+{
+  "priority": 50,
+  "entity_types": ["minecraft:iron_golem"],
+  "entity_tags": [],
+  "placements": {
+    "organapi:chest": {
+      "0": [
+        { "id": "kubejs:golem_arc_core" }
+      ]
+    }
+  },
+  "point_adjustments": []
+}

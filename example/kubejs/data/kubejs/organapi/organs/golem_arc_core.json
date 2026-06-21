@@ -1,0 +1,50 @@
+{
+  "item": "kubejs:golem_arc_core",
+  "valid_parts": ["organapi:chest"],
+  "size": 1,
+  "tooltips": [
+    "A KubeJS-only test organ for OEP, KubeJS, and Iron's Spellbooks."
+  ],
+  "tags": [
+    "kubejs",
+    "test",
+    "iron_golem_source"
+  ],
+  "effects": [
+    {
+      "conditions": [
+        {
+          "type": "static"
+        }
+      ],
+      "grants": [
+        {
+          "type": "skill",
+          "skill_name": "kubejs:golem_arc_burst",
+          "amount": 1
+        }
+      ],
+      "events": [],
+      "executions": []
+    },
+    {
+      "conditions": [
+        {
+          "type": "static"
+        }
+      ],
+      "grants": [],
+      "events": [],
+      "executions": [
+        {
+          "type": "kubejs_call",
+          "callback": "break_charge_logger",
+          "point_type": "runtime",
+          "point_id": "kubejs:break_charge",
+          "max_consume": 1,
+          "consume_points": true
+        }
+      ]
+    }
+  ]
+}

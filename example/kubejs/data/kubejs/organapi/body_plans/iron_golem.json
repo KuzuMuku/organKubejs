@@ -1,0 +1,15 @@
+{
+  "entity_types": ["minecraft:iron_golem"],
+  "parts": {
+    "organapi:chest": {
+      "enabled": true,
+      "capacity": 2,
+      "overview_area": {
+        "x": 26,
+        "y": 34,
+        "width": 48,
+        "height": 58
+      }
+    }
+  }
+}
