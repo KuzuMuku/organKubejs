@@ -1,5 +1,6 @@
 package cn.kuzuanpa.organkubejs.kubejs;
 
+import cn.kuzuanpa.organkubejs.kubejs.event.NearbyEntityActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PointActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PredicateEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.SkillCastEventJS;
@@ -13,6 +14,7 @@ public final class OrganKubejsEvents {
     public static final EventGroup GROUP = EventGroup.of("OrganKubejsEvents");
     public static final EventHandler PREDICATE = GROUP.server("predicate", () -> PredicateEventJS.class).extra(Extra.STRING).hasResult();
     public static final EventHandler POINT_ACTION = GROUP.server("pointAction", () -> PointActionEventJS.class).extra(Extra.STRING).hasResult();
+    public static final EventHandler NEARBY_ENTITY_ACTION = GROUP.server("nearbyEntityAction", () -> NearbyEntityActionEventJS.class).extra(Extra.STRING).hasResult();
     public static final EventHandler SKILL_CAST = GROUP.server("skillCast", () -> SkillCastEventJS.class).extra(Extra.STRING).hasResult();
 
     private OrganKubejsEvents() {
@@ -43,6 +45,22 @@ public final class OrganKubejsEvents {
         }
 
         EventResult result = POINT_ACTION.post(ScriptType.SERVER, callback, event);
+        Object value = result.value();
+        if (value instanceof Number number) {
+            return number.longValue();
+        }
+        if (value instanceof Boolean bool) {
+            return bool ? 1L : 0L;
+        }
+        return event.getConsumePoints();
+    }
+
+    public static long postNearbyEntityAction(String callback, NearbyEntityActionEventJS event) {
+        if (callback == null || callback.isBlank() || !NEARBY_ENTITY_ACTION.hasListeners(callback)) {
+            return 0L;
+        }
+
+        EventResult result = NEARBY_ENTITY_ACTION.post(ScriptType.SERVER, callback, event);
         Object value = result.value();
         if (value instanceof Number number) {
             return number.longValue();

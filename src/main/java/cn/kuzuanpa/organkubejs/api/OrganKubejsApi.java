@@ -7,6 +7,7 @@ import cn.kuzuanpa.organeffectprocessor.api.extension.SkillExecutor;
 import cn.kuzuanpa.organeffectprocessor.common.skill.SkillDefinition;
 import cn.kuzuanpa.organeffectprocessor.common.skill.SkillManager;
 import cn.kuzuanpa.organkubejs.kubejs.OrganKubejsEvents;
+import cn.kuzuanpa.organkubejs.kubejs.event.NearbyEntityActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PointActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PredicateEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.SkillCastEventJS;
@@ -113,6 +114,10 @@ public final class OrganKubejsApi {
 
     public static long invokePointAction(ServerPlayer player, String callback, long availablePoints, EffectDefinition.BonusAction action) {
         return OrganKubejsEvents.postPointAction(callback, new PointActionEventJS(player, callback, availablePoints, action));
+    }
+
+    public static long invokeNearbyEntityAction(ServerPlayer player, LivingEntity target, String callback, long availablePoints, EffectDefinition.BonusAction action) {
+        return OrganKubejsEvents.postNearbyEntityAction(callback, new NearbyEntityActionEventJS(player, target, callback, availablePoints, action));
     }
 
     private static String normalizeSkillId(String skillId) {
