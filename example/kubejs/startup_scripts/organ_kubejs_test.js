@@ -6,8 +6,9 @@ StartupEvents.registry('item', event => {
 
 OrganKubeJS.registerSkill(
   'kubejs:golem_arc_burst',
-  'point.organeffectprocessor.skill.kubejs.golem_arc_burst',
-  'point.organeffectprocessor.skill.kubejs.golem_arc_burst.desc',
+  'point.organeffects.skill.kubejs.golem_arc_burst',
+  'point.organeffects.skill.kubejs.golem_arc_burst.desc',
+  60,
   1,
   'golem_arc_burst_cast'
 )

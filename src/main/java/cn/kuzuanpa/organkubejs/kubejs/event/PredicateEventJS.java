@@ -1,7 +1,7 @@
 package cn.kuzuanpa.organkubejs.kubejs.event;
 
 import cn.kuzuanpa.organapi.api.query.OrganPosition;
-import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
+import cn.kuzuanpa.organeffects.api.EffectDefinition;
 import dev.latvian.mods.kubejs.event.EventJS;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;

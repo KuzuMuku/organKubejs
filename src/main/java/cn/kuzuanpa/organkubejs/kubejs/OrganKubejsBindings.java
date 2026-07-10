@@ -67,4 +67,8 @@ public final class OrganKubejsBindings {
     public void registerSkill(String skillId, String nameKey, String descriptionKey, int maxLevel, String callback) {
         OrganKubejsApi.registerSkill(skillId, nameKey, descriptionKey, maxLevel, callback);
     }
+
+    public void registerSkill(String skillId, String nameKey, String descriptionKey, int cooldownTicks, int maxLevel, String callback) {
+        OrganKubejsApi.registerSkill(skillId, nameKey, descriptionKey, cooldownTicks, maxLevel, callback);
+    }
 }

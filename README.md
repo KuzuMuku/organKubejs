@@ -9,7 +9,7 @@ OrganEffects的KubeJS兼容层.
 - `OrganKubeJS` 修改玩家点数的js类
 
 ## 示例
-1. 注册物品  kubejs/startup_scripts/oep_items.js
+1. 注册物品  kubejs/startup_scripts/OrganEffects_items.js
 
 StartupEvents.registry('item', event => {
   event.create('storm_organ')
@@ -17,7 +17,7 @@ StartupEvents.registry('item', event => {
     .maxStackSize(1)
 })
 
-2. 让它能放进器官槽  kubejs/server_scripts/oep_tags.js
+2. 让它能放进器官槽  kubejs/server_scripts/OrganEffects_tags.js
 
 ServerEvents.tags('item', event => {
   event.add('organapi:organs', 'kubejs:storm_organ')
@@ -61,7 +61,7 @@ ServerEvents.tags('item', event => {
   ]
 }
 
-4. KubeJS 回调  kubejs/server_scripts/oep_callbacks.js
+4. KubeJS 回调  kubejs/server_scripts/OrganEffects_callbacks.js
 
 OrganKubejsEvents.predicate('storm_predicate', event => {
   const player = event.player
@@ -106,4 +106,4 @@ PlayerEvents.loggedIn(event => {
 - 如果“正在下雨且玩家高度 > 80”，kubejs_predicate 返回 true
 - 器官提供 counter:kubejs:storm_charge = 3
 - kubejs_call 检测到这个点后调用 storm_burst
-- storm_burst 返回 3，OEP 就消费 3 点  - 同时脚本里给玩家回血并发消息
+- storm_burst 返回 3，OrganEffects 就消费 3 点  - 同时脚本里给玩家回血并发消息

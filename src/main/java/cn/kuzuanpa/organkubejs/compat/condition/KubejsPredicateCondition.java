@@ -1,8 +1,8 @@
 package cn.kuzuanpa.organkubejs.compat.condition;
 
 import cn.kuzuanpa.organapi.api.query.OrganPosition;
-import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
-import cn.kuzuanpa.organeffectprocessor.api.extension.ConditionHandler;
+import cn.kuzuanpa.organeffects.api.EffectDefinition;
+import cn.kuzuanpa.organeffects.api.extension.ConditionHandler;
 import cn.kuzuanpa.organkubejs.api.OrganKubejsApi;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

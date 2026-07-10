@@ -1,6 +1,6 @@
 package cn.kuzuanpa.organkubejs.kubejs.event;
 
-import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
+import cn.kuzuanpa.organeffects.api.EffectDefinition;
 import cn.kuzuanpa.organkubejs.api.OrganKubejsApi;
 import dev.latvian.mods.kubejs.event.EventJS;
 import net.minecraft.server.MinecraftServer;

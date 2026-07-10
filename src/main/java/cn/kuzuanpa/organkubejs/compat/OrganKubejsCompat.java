@@ -1,6 +1,6 @@
 package cn.kuzuanpa.organkubejs.compat;
 
-import cn.kuzuanpa.organeffectprocessor.api.extension.OepExtensionApi;
+import cn.kuzuanpa.organeffects.api.extension.OrganEffectsExtensionApi;
 import cn.kuzuanpa.organkubejs.compat.condition.KubejsPredicateCondition;
 import cn.kuzuanpa.organkubejs.compat.execution.KubejsCallbackExecutor;
 import cn.kuzuanpa.organkubejs.compat.execution.KubejsNearbyEntitiesExecutor;
@@ -10,8 +10,8 @@ public final class OrganKubejsCompat {
     }
 
     public static void register() {
-        OepExtensionApi.registerConditionHandler("kubejs_predicate", new KubejsPredicateCondition());
-        OepExtensionApi.registerPointExecutor(new KubejsCallbackExecutor());
-        OepExtensionApi.registerPointExecutor(new KubejsNearbyEntitiesExecutor());
+        OrganEffectsExtensionApi.registerConditionHandler("kubejs_predicate", new KubejsPredicateCondition());
+        OrganEffectsExtensionApi.registerPointExecutor(new KubejsCallbackExecutor());
+        OrganEffectsExtensionApi.registerPointExecutor(new KubejsNearbyEntitiesExecutor());
     }
 }

@@ -1,8 +1,8 @@
 package cn.kuzuanpa.organkubejs.compat.execution;
 
-import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
-import cn.kuzuanpa.organeffectprocessor.api.extension.PointExecutor;
-import cn.kuzuanpa.organeffectprocessor.common.effect.RuntimePointExecutor;
+import cn.kuzuanpa.organeffects.api.EffectDefinition;
+import cn.kuzuanpa.organeffects.api.extension.PointExecutor;
+import cn.kuzuanpa.organeffects.common.effect.RuntimePointExecutor;
 import cn.kuzuanpa.organkubejs.api.OrganKubejsApi;
 import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,6 +58,8 @@ public final class KubejsCallbackExecutor implements PointExecutor {
                 action.source(),
                 maxConsume,
                 action.isPointsConsume(),
+                action.hidden(),
+                action.customDisplayKey(),
                 action.effectId(),
                 action.durationTicks(),
                 action.amplifier(),

@@ -59,7 +59,7 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation name: 'organapi', version: '1.0.0-dev'
-    implementation name: 'organeffectprocessor', version: '1.0.0-dev'
+    implementation name: 'organeffects', version: '1.0.0-dev'
     compileOnly files(
             "${localModsDir}/kubejs-forge-2001.6.5-build.26.jar",
             "${localModsDir}/architectury-9.2.14-forge.jar",

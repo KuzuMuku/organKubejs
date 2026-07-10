@@ -43,8 +43,8 @@ authors="kuzuanpa" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-KubeJS bridge addon for Organ Effect Processor.
-Adds script-driven OEP conditions, point callbacks, and direct point bindings.
+KubeJS bridge addon for Organ Effects.
+Adds script-driven OrganEffects conditions, point callbacks, and direct point bindings.
 '''
 
 [[dependencies.organkubejs]] #optional
@@ -77,7 +77,7 @@ Adds script-driven OEP conditions, point callbacks, and direct point bindings.
     side="BOTH"
 
 [[dependencies.organkubejs]]
-    modId="organeffectprocessor"
+    modId="organeffects"
     mandatory=true
     versionRange="[1.0,)"
     ordering="AFTER"

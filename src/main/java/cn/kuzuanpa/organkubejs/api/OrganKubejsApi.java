@@ -1,11 +1,11 @@
 package cn.kuzuanpa.organkubejs.api;
 
 import cn.kuzuanpa.organapi.api.query.OrganPosition;
-import cn.kuzuanpa.organeffectprocessor.api.EffectDefinition;
-import cn.kuzuanpa.organeffectprocessor.api.OepPointApi;
-import cn.kuzuanpa.organeffectprocessor.api.extension.SkillExecutor;
-import cn.kuzuanpa.organeffectprocessor.common.skill.SkillDefinition;
-import cn.kuzuanpa.organeffectprocessor.common.skill.SkillManager;
+import cn.kuzuanpa.organeffects.api.EffectDefinition;
+import cn.kuzuanpa.organeffects.api.OrganEffectsPointApi;
+import cn.kuzuanpa.organeffects.api.extension.SkillExecutor;
+import cn.kuzuanpa.organeffects.common.skill.SkillDefinition;
+import cn.kuzuanpa.organeffects.common.skill.SkillManager;
 import cn.kuzuanpa.organkubejs.kubejs.OrganKubejsEvents;
 import cn.kuzuanpa.organkubejs.kubejs.event.NearbyEntityActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PointActionEventJS;
@@ -29,7 +29,7 @@ public final class OrganKubejsApi {
     }
 
     public static long getPoint(LivingEntity entity, String pointKey) {
-        return OepPointApi.getPoint(entity, pointKey);
+        return OrganEffectsPointApi.getPoint(entity, pointKey);
     }
 
     public static long getPoint(LivingEntity entity, String pointType, String pointId) {
@@ -37,7 +37,7 @@ public final class OrganKubejsApi {
     }
 
     public static long addSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
-        return OepPointApi.addSourcePoint(entity, sourceTag, pointKey, amount);
+        return OrganEffectsPointApi.addSourcePoint(entity, sourceTag, pointKey, amount);
     }
 
     public static long addSourcePoint(LivingEntity entity, String sourceTag, String pointType, String pointId, long amount) {
@@ -45,7 +45,7 @@ public final class OrganKubejsApi {
     }
 
     public static long addRuntimePoint(LivingEntity entity, String pointKey, long amount, long durationTicks) {
-        return OepPointApi.addRuntimePoint(entity, pointKey, amount, durationTicks);
+        return OrganEffectsPointApi.addRuntimePoint(entity, pointKey, amount, durationTicks);
     }
 
     public static long addRuntimePoint(LivingEntity entity, String pointType, String pointId, long amount, long durationTicks) {
@@ -53,38 +53,42 @@ public final class OrganKubejsApi {
     }
 
     public static long setSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long value) {
-        return OepPointApi.setSourcePoint(entity, sourceTag, pointKey, value);
+        return OrganEffectsPointApi.setSourcePoint(entity, sourceTag, pointKey, value);
     }
 
     public static long consumeSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
-        return OepPointApi.consumeSourcePoint(entity, sourceTag, pointKey, amount);
+        return OrganEffectsPointApi.consumeSourcePoint(entity, sourceTag, pointKey, amount);
     }
 
     public static long clearSourcePoint(LivingEntity entity, String sourceTag, String pointKey) {
-        return OepPointApi.clearSourcePoint(entity, sourceTag, pointKey);
+        return OrganEffectsPointApi.clearSourcePoint(entity, sourceTag, pointKey);
     }
 
     public static long setRuntimePoint(LivingEntity entity, String pointKey, long value, long durationTicks) {
-        return OepPointApi.setRuntimePoint(entity, pointKey, value, durationTicks);
+        return OrganEffectsPointApi.setRuntimePoint(entity, pointKey, value, durationTicks);
     }
 
     public static long consumeRuntimePoint(LivingEntity entity, String pointKey, long amount) {
-        return OepPointApi.consumeRuntimePoint(entity, pointKey, amount);
+        return OrganEffectsPointApi.consumeRuntimePoint(entity, pointKey, amount);
     }
 
     public static long clearRuntimePoint(LivingEntity entity, String pointKey) {
-        return OepPointApi.clearRuntimePoint(entity, pointKey);
+        return OrganEffectsPointApi.clearRuntimePoint(entity, pointKey);
     }
 
     public static void recompute(LivingEntity entity) {
-        OepPointApi.recompute(entity);
+        OrganEffectsPointApi.recompute(entity);
     }
 
     public static void refresh(LivingEntity entity) {
-        OepPointApi.refresh(entity);
+        OrganEffectsPointApi.refresh(entity);
     }
 
     public static void registerSkill(String skillId, String nameKey, String descriptionKey, int maxLevel, String callback) {
+        registerSkill(skillId, nameKey, descriptionKey, 0, maxLevel, callback);
+    }
+
+    public static void registerSkill(String skillId, String nameKey, String descriptionKey, int cooldownTicks, int maxLevel, String callback) {
         String normalizedSkillId = normalizeSkillId(skillId);
         if (normalizedSkillId.isBlank()) {
             return;
@@ -97,6 +101,7 @@ public final class OrganKubejsApi {
                 resolvedNameKey,
                 resolvedDescriptionKey,
                 List.of(),
+                Math.max(0, cooldownTicks),
                 Math.max(1, maxLevel)
         ));
         SkillManager.registerSkillExecutor(normalizedSkillId, new SkillExecutor() {

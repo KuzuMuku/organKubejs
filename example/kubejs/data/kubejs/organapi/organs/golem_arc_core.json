@@ -3,7 +3,7 @@
   "valid_parts": ["organapi:chest"],
   "size": 1,
   "tooltips": [
-    "A KubeJS-only test organ for OEP, KubeJS, and Iron's Spellbooks."
+    "A KubeJS-only test organ for OrganEffects, KubeJS, and Iron's Spellbooks."
   ],
   "tags": [
     "kubejs",
