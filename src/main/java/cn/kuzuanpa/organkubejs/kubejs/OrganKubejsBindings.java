@@ -31,6 +31,10 @@ public final class OrganKubejsBindings {
         return OrganKubejsApi.getPoint(entity, pointType, pointId);
     }
 
+    public java.util.Map<String, Long> getPoints(LivingEntity entity) {
+        return OrganKubejsApi.getPoints(entity);
+    }
+
     public long addSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
         return OrganKubejsApi.addSourcePoint(entity, sourceTag, pointKey, amount);
     }

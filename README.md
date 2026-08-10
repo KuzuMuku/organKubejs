@@ -2,10 +2,11 @@
 
 OrganEffects的KubeJS兼容层.
 
-目前有三个可用的兼容器:
+目前有四个可用的兼容器:
 
 - `kubejs_predicate` 使用一个返回boolean的kubejs方法作为条件
 - `kubejs_call` 获得点数时调用返回long的kubejs方法，返回数值为消耗的点数
+- `kubejs_target_call` 走 `organEffects` 的目标执行链，在玩家命中目标时调用kubejs方法
 - `OrganKubeJS` 修改玩家点数的js类
 
 ## 示例

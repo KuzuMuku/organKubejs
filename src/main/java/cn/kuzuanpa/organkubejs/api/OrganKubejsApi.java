@@ -26,6 +26,7 @@ import cn.kuzuanpa.organkubejs.kubejs.event.NearbyEntityActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PointActionEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.PredicateEventJS;
 import cn.kuzuanpa.organkubejs.kubejs.event.SkillCastEventJS;
+import cn.kuzuanpa.organkubejs.kubejs.event.TargetActionEventJS;
 import java.util.List;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -49,6 +50,10 @@ public final class OrganKubejsApi {
 
     public static long getPoint(LivingEntity entity, String pointType, String pointId) {
         return getPoint(entity, pointKey(pointType, pointId));
+    }
+
+    public static java.util.Map<String, Long> getPoints(LivingEntity entity) {
+        return OrganEffectsPointApi.getPoints(entity);
     }
 
     public static long addSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
@@ -138,6 +143,11 @@ public final class OrganKubejsApi {
 
     public static long invokeNearbyEntityAction(ServerPlayer player, LivingEntity target, String callback, long availablePoints, EffectDefinition.BonusAction action) {
         return OrganKubejsEvents.postNearbyEntityAction(callback, new NearbyEntityActionEventJS(player, target, callback, availablePoints, action));
+    }
+
+    public static long invokeTargetAction(ServerPlayer player, LivingEntity target, String callback, long availablePoints,
+                                          EffectDefinition.BonusAction action, cn.kuzuanpa.organeffects.api.extension.OrganEffectsRuntimeEvent runtimeEvent) {
+        return OrganKubejsEvents.postTargetAction(callback, new TargetActionEventJS(player, target, callback, availablePoints, action, runtimeEvent));
     }
 
     private static String normalizeSkillId(String skillId) {
