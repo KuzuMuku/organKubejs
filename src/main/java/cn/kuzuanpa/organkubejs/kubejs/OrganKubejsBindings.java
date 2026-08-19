@@ -35,6 +35,30 @@ public final class OrganKubejsBindings {
         return OrganKubejsApi.getPoints(entity);
     }
 
+    public long getMark(LivingEntity entity, String pointId) {
+        return OrganKubejsApi.getMark(entity, pointId);
+    }
+
+    public java.util.Map<String, Long> getMarks(LivingEntity entity) {
+        return OrganKubejsApi.getMarks(entity);
+    }
+
+    public long addMarkPoint(LivingEntity target, String pointId, long amount) {
+        return OrganKubejsApi.addMarkPoint(target, pointId, amount);
+    }
+
+    public long consumeMarkPoint(LivingEntity target, String pointId, long amount) {
+        return OrganKubejsApi.consumeMarkPoint(target, pointId, amount);
+    }
+
+    public long clearMarkPoint(LivingEntity target, String pointId) {
+        return OrganKubejsApi.clearMarkPoint(target, pointId);
+    }
+
+    public void clearMarks(LivingEntity target) {
+        OrganKubejsApi.clearMarks(target);
+    }
+
     public long addSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
         return OrganKubejsApi.addSourcePoint(entity, sourceTag, pointKey, amount);
     }

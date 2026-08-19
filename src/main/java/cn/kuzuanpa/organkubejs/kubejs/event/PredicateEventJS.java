@@ -71,31 +71,27 @@ public class PredicateEventJS extends EventJS {
         if (condition == null) {
             return null;
         }
-        String extra = condition.extraString(key);
-        return extra != null ? extra : condition.configString(key);
+        return condition.configString(key);
     }
 
     public Long configLong(String key) {
         if (condition == null) {
             return null;
         }
-        Long extra = condition.extraLong(key);
-        return extra != null ? extra : condition.configLong(key);
+        return condition.configLong(key);
     }
 
     public Double configDouble(String key) {
         if (condition == null) {
             return null;
         }
-        Double extra = condition.extraDouble(key);
-        return extra != null ? extra : condition.configDouble(key);
+        return condition.configDouble(key);
     }
 
     public Boolean configBoolean(String key) {
         if (condition == null) {
             return null;
         }
-        Boolean extra = condition.extraBoolean(key);
-        return extra != null ? extra : condition.configBoolean(key);
+        return condition.configBoolean(key);
     }
 }

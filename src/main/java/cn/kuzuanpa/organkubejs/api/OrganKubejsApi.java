@@ -56,6 +56,30 @@ public final class OrganKubejsApi {
         return OrganEffectsPointApi.getPoints(entity);
     }
 
+    public static long getMark(LivingEntity entity, String pointId) {
+        return getPoint(entity, pointKey("mark", pointId));
+    }
+
+    public static java.util.Map<String, Long> getMarks(LivingEntity entity) {
+        return OrganEffectsPointApi.getMarks(entity);
+    }
+
+    public static long addMarkPoint(LivingEntity target, String pointId, long amount) {
+        return OrganEffectsPointApi.addMarkPoint(target, pointId, amount);
+    }
+
+    public static long consumeMarkPoint(LivingEntity target, String pointId, long amount) {
+        return OrganEffectsPointApi.consumeMarkPoint(target, pointId, amount);
+    }
+
+    public static long clearMarkPoint(LivingEntity target, String pointId) {
+        return OrganEffectsPointApi.clearMarkPoint(target, pointId);
+    }
+
+    public static void clearMarks(LivingEntity target) {
+        OrganEffectsPointApi.clearMarks(target);
+    }
+
     public static long addSourcePoint(LivingEntity entity, String sourceTag, String pointKey, long amount) {
         return OrganEffectsPointApi.addSourcePoint(entity, sourceTag, pointKey, amount);
     }

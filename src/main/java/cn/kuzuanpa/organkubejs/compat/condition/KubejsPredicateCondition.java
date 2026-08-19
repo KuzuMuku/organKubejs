@@ -30,9 +30,7 @@ public final class KubejsPredicateCondition implements ConditionHandler {
         }
 
         String callback = firstNonBlank(
-                condition.extraString("callback"),
                 condition.configString("callback"),
-                condition.extraString("id"),
                 condition.configString("id")
         );
         if (callback == null) {
